@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sahitya Raffi · Photography</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,500;1,300&family=Noto+Serif+Bengali:wght@300;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0f181c;--asphalt:#1b2a30;--glass:#cfe3e6;--lamp:#e8b04a;--paper:#eef3f2}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font:300 1.125rem/1.7 "Newsreader","Noto Serif Bengali",serif}
+:lang(bn){font-family:"Noto Serif Bengali","Newsreader",serif;line-height:1.9}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--lamp);outline-offset:3px}
+.bar{position:fixed;inset:0 0 auto 0;display:flex;justify-content:space-between;align-items:center;padding:.9rem 1.4rem;z-index:5;background:rgba(15,24,28,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.bar nav{display:flex;gap:1.4rem}
+.bar a{text-decoration:none}
+.bar a:hover{color:var(--lamp)}
+#lang{background:none;border:1px solid var(--glass);color:var(--paper);padding:.2rem .8rem;border-radius:99px;font:inherit;cursor:pointer}
+#lang:hover{border-color:var(--lamp);color:var(--lamp)}
+.hero{min-height:100svh;display:grid;place-content:center;padding:6rem 1.4rem 3rem;background:linear-gradient(180deg,rgba(15,24,28,.5),rgba(15,24,28,.78)),url("images/hero.jpg") center/cover no-repeat,linear-gradient(180deg,var(--ink) 0%,var(--asphalt) 55%,#2c4249 100%);overflow:hidden}
+.name{text-shadow:0 2px 24px rgba(0,0,0,.45);font-size:clamp(2.8rem,11vw,8.5rem);font-weight:300;line-height:1;letter-spacing:-.02em}
+.name.mirror{transform:scaleY(-1);margin-top:.15em;opacity:.35;filter:blur(1.5px);-webkit-mask-image:linear-gradient(to bottom,transparent 15%,#000);mask-image:linear-gradient(to bottom,transparent 15%,#000);animation:ripple 7s ease-in-out infinite;user-select:none}
+@keyframes ripple{50%{transform:scaleY(-1) translateX(6px);filter:blur(3px)}}
+.tag{margin-top:2rem;max-width:34rem;color:var(--glass)}
+section{padding:5rem 1.4rem;max-width:72rem;margin:auto}
+h2{font-weight:500;font-size:1.9rem;margin-bottom:1.5rem}
+.tabs{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.6rem}
+.tabs button{background:none;border:1px solid rgba(207,227,230,.35);color:var(--paper);padding:.3rem 1rem;border-radius:99px;font:inherit;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--glass);color:var(--ink);border-color:var(--glass)}
+.grid{columns:3 16rem;column-gap:1rem}
+.grid figure{break-inside:avoid;margin-bottom:1rem;cursor:zoom-in;position:relative;background:var(--asphalt);min-height:12rem}
+.grid img{width:100%;display:block}
+.grid figcaption{position:absolute;inset:auto 0 0 0;padding:.6rem .9rem;font-size:.95rem;background:rgba(15,24,28,.5);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;transition:opacity .25s}
+.grid figure:hover figcaption,.grid figure:focus-visible figcaption{opacity:1}
+.about{display:grid;gap:2rem;grid-template-columns:repeat(auto-fit,minmax(18rem,1fr))}
+.glass{padding:1.6rem;border:1px solid rgba(207,227,230,.25);background:rgba(207,227,230,.07);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.links{display:flex;gap:1.6rem;flex-wrap:wrap}
+footer{padding:3rem 1.4rem;text-align:center;color:var(--glass);font-size:.95rem}
+#lb{position:fixed;inset:0;background:rgba(10,16,19,.94);display:none;place-items:center;z-index:10;cursor:zoom-out;padding:1rem}
+#lb.on{display:grid}
+#lb img{max-width:100%;max-height:92vh}
+[data-l]{display:none}
+html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
+@media(prefers-reduced-motion:reduce){.name.mirror{animation:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header class="bar">
+  <nav>
+    <a href="#work"><span data-l="bn">কাজ</span><span data-l="en">Work</span></a>
+    <a href="#about"><span data-l="bn">পরিচয়</span><span data-l="en">About</span></a>
+    <a href="#contact"><span data-l="bn">যোগাযোগ</span><span data-l="en">Contact</span></a>
+  </nav>
+  <button id="lang" aria-label="Switch language">EN / বাং</button>
+</header>
+
+<main>
+<div class="hero">
+  <div>
+    <h1 class="name"><span data-l="bn">সাহিত্য রাফী</span><span data-l="en">Sahitya Raffi</span></h1>
+    <p class="tag">
+      <span data-l="bn">বাংলাদেশের রাস্তা, মানুষ আর জীবনের ছবি।</span>
+      <span data-l="en">Street, portrait and documentary photography from Bangladesh.</span>
+    </p>
+  </div>
+</div>
+
+<section id="work">
+  <h2><span data-l="bn">নির্বাচিত কাজ</span><span data-l="en">Selected work</span></h2>
+  <div class="tabs" id="tabs"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="about">
+  <div class="about">
+    <div>
+      <h2><span data-l="bn">পরিচয়</span><span data-l="en">About</span></h2>
+      <p data-l="bn">আমি সাহিত্য রাফী, বাংলাদেশের একজন ফটোগ্রাফার। শহর ও গ্রামের রাস্তা, মানুষ আর দৈনন্দিন জীবনের ছবি তুলি।</p>
+      <p data-l="en">I'm Sahitya Raffi, a photographer based in Bangladesh. I photograph streets, people and everyday life, in cities and villages.</p>
+    </div>
+    <div class="glass">
+      <p data-l="bn">রাস্তার ছবি · পোর্ট্রেট · ডকুমেন্টারি</p>
+      <p data-l="en">Street · Portrait · Documentary</p>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2><span data-l="bn">যোগাযোগ</span><span data-l="en">Contact</span></h2>
+  <div class="links" id="links"></div>
+</section>
+</main>
+
+<footer>© <span id="yr"></span> Sahitya Raffi</footer>
+<div id="lb" role="dialog" aria-label="Photo viewer"><img alt=""></div>
+
+<script>
+/* ===== EDIT THIS PART ===== */
+// Put photos in an "images" folder next to index.html, then list them here.
+const PHOTOS = [
+  {src:"images/street-01.jpg", cat:"street",   bn:"ঢাকার রাস্তা", en:"Dhaka street"},
+  {src:"images/street-02.jpg", cat:"street",   bn:"কাচের ওপারে", en:"Behind the glass"},
+  {src:"images/portrait-01.jpg", cat:"portrait", bn:"প্রতিকৃতি", en:"Portrait"},
+  {src:"images/doc-01.jpg",    cat:"documentary", bn:"জীবনের ছবি", en:"Everyday life"}
+];
+const CATS = {all:["সব","All"], street:["স্ট্রিট","Street"], portrait:["পোর্ট্রেট","Portrait"], documentary:["ডকুমেন্টারি","Documentary"]};
+const LINKS = [
+  {url:"https://facebook.com/YOUR-PAGE", bn:"ফেসবুক", en:"Facebook"},
+  {url:"mailto:you@example.com", bn:"ইমেইল", en:"Email"}
+];
+/* ========================== */
+
+const $ = id => document.getElementById(id);
+let lang = "bn", cat = "all";
+const L = o => o[lang];
+
+function render(){
+  document.documentElement.lang = lang;
+  $("tabs").innerHTML = "";
+  Object.entries(CATS).forEach(([k,v])=>{
+    const b = document.createElement("button");
+    b.textContent = v[lang==="bn"?0:1];
+    b.setAttribute("aria-pressed", k===cat);
+    b.onclick = ()=>{cat=k;render()};
+    $("tabs").append(b);
+  });
+  $("grid").innerHTML = "";
+  PHOTOS.filter(p=>cat==="all"||p.cat===cat).forEach(p=>{
+    const f = document.createElement("figure");
+    f.tabIndex = 0;
+    const img = new Image();
+    img.src = p.src; img.loading = "lazy"; img.alt = L(p);
+    img.onerror = ()=>{img.remove();f.style.minHeight="14rem"};
+    const c = document.createElement("figcaption");
+    c.textContent = L(p);
+    f.append(img,c);
+    const open = ()=>{ if(!img.isConnected) return; $("lb").firstChild.src = p.src; $("lb").classList.add("on") };
+    f.onclick = open;
+    f.onkeydown = e=>{ if(e.key==="Enter") open() };
+    $("grid").append(f);
+  });
+  $("links").innerHTML = LINKS.map(x=>`<a href="${x.url}">${L(x)}</a>`).join("");
+  $("lang").textContent = lang==="bn" ? "EN" : "বাংলা";
+}
+$("lang").onclick = ()=>{lang = lang==="bn"?"en":"bn";render()};
+$("lb").onclick = ()=>$("lb").classList.remove("on");
+document.onkeydown = e=>{ if(e.key==="Escape") $("lb").classList.remove("on") };
+$("yr").textContent = new Date().getFullYear();
+render();
+</script>
+</body>
+</html>
