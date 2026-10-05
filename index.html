@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sahitya Raffi · Photography</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,500;1,300&family=Noto+Serif+Bengali:wght@300;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 :root{--ink:#0f181c;--asphalt:#1b2a30;--glass:#cfe3e6;--lamp:#e8b04a;--paper:#eef3f2}
 *{box-sizing:border-box;margin:0}
@@ -61,10 +61,10 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 @media(prefers-reduced-motion:reduce){.hero::before,.name,.tag,#lb.on{animation:none}.js .rv{opacity:1;transform:none;transition:none}.grid img{transition:none}}
 .hero>div::before{content:"";display:block;width:3.2rem;height:2px;background:var(--lamp);margin-bottom:1.2rem;animation:grow 1.2s .2s both}@keyframes grow{from{width:0}}@media(prefers-reduced-motion:reduce){.hero>div::before{animation:none}}
 
-@keyframes nameIn{from{opacity:0;transform:translateY(38px);filter:blur(9px)}}
-@keyframes spread{from{letter-spacing:.7em}}
+@keyframes nameIn{from{opacity:0;filter:blur(10px)}}
+@keyframes spread{from{letter-spacing:var(--s0,.62em)}}
 .name{animation:nameIn 1.7s cubic-bezier(.2,.7,.2,1) .15s both}
-.name [data-l=en]{animation:spread 2.2s cubic-bezier(.2,.7,.2,1) .15s both}
+.name{white-space:nowrap;--s0:.62em}@media(max-width:600px){.name{--s0:.4em}.name [data-l=en]{font-size:.7em}}.name [data-l=en]{animation:spread 2.4s cubic-bezier(.2,.7,.2,1) .15s both}
 .js .rv.in.gone{opacity:.2;transform:translateY(-20px)}
 @media(prefers-reduced-motion:reduce){.name,.name [data-l=en]{animation:none}.js .rv.in.gone{opacity:1;transform:none}}
 </style>
@@ -72,26 +72,25 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 <body>
 <header class="bar">
   <nav>
-    <a href="#work"><span data-l="bn">কাজ</span><span data-l="en">Work</span></a>
-    <a href="#about"><span data-l="bn">পরিচয়</span><span data-l="en">About</span></a>
-    <a href="#contact"><span data-l="bn">যোগাযোগ</span><span data-l="en">Contact</span></a>
+    <a href="#work"><span data-l="en">Work</span></a>
+    <a href="#about"><span data-l="en">About</span></a>
+    <a href="#contact"><span data-l="en">Contact</span></a>
   </nav>
-  <button id="lang" aria-label="Switch language">EN / বাং</button>
 </header>
 
 <main>
 <div class="hero">
   <div>
-    <h1 class="name"><span data-l="bn">সাহিত্য রাফী</span><span data-l="en">Sahitya Raffi</span></h1>
+    <h1 class="name"><span data-l="en">Sahitya Raffi</span></h1>
     <p class="tag">
-      <span data-l="bn">বাংলাদেশের রাস্তা, মানুষ আর জীবনের ছবি।</span>
+      
       <span data-l="en">Street, portrait and documentary photography from Bangladesh.</span>
     </p>
   </div>
 </div>
 
 <section id="work">
-  <h2><span data-l="bn">নির্বাচিত কাজ</span><span data-l="en">Selected work</span></h2>
+  <h2><span data-l="en">Selected work</span></h2>
   <div class="tabs" id="tabs"></div>
   <div class="grid" id="grid"></div>
 </section>
@@ -99,19 +98,17 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 <section id="about">
   <div class="about">
     <div>
-      <h2><span data-l="bn">পরিচয়</span><span data-l="en">About</span></h2>
-      <p data-l="bn">আমি সাহিত্য রাফী, বাংলাদেশের একজন ফটোগ্রাফার। শহর ও গ্রামের রাস্তা, মানুষ আর দৈনন্দিন জীবনের ছবি তুলি।</p>
+      <h2><span data-l="en">About</span></h2>
       <p data-l="en">I'm Sahitya Raffi, a photographer based in Bangladesh. I photograph streets, people and everyday life, in cities and villages.</p>
     </div>
     <div class="glass">
-      <p data-l="bn">রাস্তার ছবি · পোর্ট্রেট · ডকুমেন্টারি</p>
       <p data-l="en">Street · Portrait · Documentary</p>
     </div>
   </div>
 </section>
 
 <section id="contact">
-  <h2><span data-l="bn">যোগাযোগ</span><span data-l="en">Contact</span></h2>
+  <h2><span data-l="en">Contact</span></h2>
   <div class="links" id="links"></div>
 </section>
 </main>
@@ -136,7 +133,7 @@ const LINKS = [
 /* ========================== */
 
 const $ = id => document.getElementById(id);
-let lang = "bn", cat = "all";
+let lang = "en", cat = "all";
 const L = o => o[lang];
 
 function render(){
@@ -165,10 +162,8 @@ function render(){
     $("grid").append(f);
   });
   $("links").innerHTML = LINKS.map(x=>`<a href="${x.url}">${L(x)}</a>`).join("");
-  $("lang").textContent = lang==="bn" ? "EN" : "বাংলা";
   if(typeof reveal==="function") reveal();
 }
-$("lang").onclick = ()=>{lang = lang==="bn"?"en":"bn";render()};
 $("lb").onclick = ()=>$("lb").classList.remove("on");
 document.onkeydown = e=>{ if(e.key==="Escape") $("lb").classList.remove("on") };
 $("yr").textContent = new Date().getFullYear();
