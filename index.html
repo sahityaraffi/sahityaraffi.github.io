@@ -21,7 +21,7 @@ a{color:inherit}
 .bar a:hover{color:var(--lamp)}
 #lang{background:none;border:1px solid var(--glass);color:var(--paper);padding:.2rem .8rem;border-radius:99px;font:inherit;cursor:pointer}
 #lang:hover{border-color:var(--lamp);color:var(--lamp)}
-.hero{position:relative;min-height:100svh;display:grid;place-content:end start;padding:6rem 1.4rem 3.5rem;background:linear-gradient(180deg,var(--ink) 0%,var(--asphalt) 55%,#2c4249 100%);overflow:hidden}.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,24,28,.5),rgba(15,24,28,.78)),var(--hero,none) center/cover no-repeat;translate:0 var(--py,0px);will-change:translate;animation:kb 24s ease-in-out infinite alternate}.hero>div{position:relative}@keyframes kb{to{transform:scale(1.09)}}
+.hero{position:relative;min-height:100svh;display:grid;place-content:end start;padding:6rem 1.4rem 3.5rem;background:linear-gradient(180deg,var(--ink) 0%,var(--asphalt) 55%,#2c4249 100%);overflow:hidden}.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,24,28,.5),rgba(15,24,28,.78)),var(--hero,none) 20% center/cover no-repeat;translate:0 var(--py,0px);will-change:translate;animation:kb 24s ease-in-out infinite alternate}.hero>div{position:relative}@keyframes kb{to{transform:scale(1.05)}}
 .name{text-shadow:0 2px 20px rgba(0,0,0,.5);font-size:clamp(1.9rem,6.5vw,3.8rem);font-weight:300;line-height:1.15}.name [data-l=en]{text-transform:uppercase;letter-spacing:.26em;font-size:.82em}
 .name.mirror{transform:scaleY(-1);margin-top:.15em;opacity:.35;filter:blur(1.5px);-webkit-mask-image:linear-gradient(to bottom,transparent 15%,#000);mask-image:linear-gradient(to bottom,transparent 15%,#000);animation:ripple 7s ease-in-out infinite;user-select:none}
 @keyframes ripple{50%{transform:scaleY(-1) translateX(6px);filter:blur(3px)}}
@@ -67,6 +67,16 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 .name{white-space:nowrap;--s0:.62em}@media(max-width:600px){.name{--s0:.4em}.name [data-l=en]{font-size:.7em}}.name [data-l=en]{animation:spread 2.4s cubic-bezier(.2,.7,.2,1) .15s both}
 .js .rv.in.gone{opacity:.2;transform:translateY(-20px)}
 @media(prefers-reduced-motion:reduce){.name,.name [data-l=en]{animation:none}.js .rv.in.gone{opacity:1;transform:none}}
+.grid h3{column-span:all;font-weight:500;font-size:1.3rem;letter-spacing:.04em;margin:1.8rem 0 .9rem;color:var(--glass)}.grid h3:first-child{margin-top:0}
+#highlights{max-width:none;padding:4rem 0 1rem}
+#highlights h2{max-width:72rem;margin:0 auto 1.5rem;padding:0 1.4rem}
+.track{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.belt{display:flex;width:max-content;animation:slide 60s linear infinite}
+.track:hover .belt{animation-play-state:paused}
+.belt figure{margin:0 1rem 0 0;cursor:zoom-in;background:var(--asphalt)}
+.belt img{display:block;height:clamp(14rem,34vw,23rem);width:auto}
+@keyframes slide{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.belt{animation:none}.track{overflow-x:auto;-webkit-mask-image:none;mask-image:none}}
 </style>
 </head>
 <body>
@@ -88,6 +98,11 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
     </p>
   </div>
 </div>
+
+<section id="highlights" hidden>
+  <h2><span data-l="en">Highlights</span></h2>
+  <div class="track"><div class="belt" id="belt"></div></div>
+</section>
 
 <section id="work">
   <h2><span data-l="en">Selected work</span></h2>
@@ -118,14 +133,16 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 
 <script>
 /* ===== EDIT THIS PART ===== */
-// Put photos in an "images" folder next to index.html, then list them here.
+// Put photos next to index.html (or in an "images" folder), then list them here.
+// Add highlight:true to show a photo in the sliding Highlights strip under the banner.
+// Add series:"Name" to any photo to show it under the Series tab (same name = same series).
 const PHOTOS = [
-  {src:"images/street-01.jpg", cat:"street",   bn:"ঢাকার রাস্তা", en:"Dhaka street"},
-  {src:"images/street-02.jpg", cat:"street",   bn:"কাচের ওপারে", en:"Behind the glass"},
-  {src:"images/portrait-01.jpg", cat:"portrait", bn:"প্রতিকৃতি", en:"Portrait"},
-  {src:"images/doc-01.jpg",    cat:"documentary", bn:"জীবনের ছবি", en:"Everyday life"}
+  {src:"images/street-01.jpg",   cat:"street",      en:"Dhaka street", highlight:true,    series:"Dhaka Streets"},
+  {src:"images/street-02.jpg",   cat:"street",      en:"Behind the glass", series:"Dhaka Streets"},
+  {src:"images/portrait-01.jpg", cat:"portrait",    en:"Portrait", highlight:true},
+  {src:"images/doc-01.jpg",      cat:"documentary", en:"Everyday life", highlight:true,   series:"Village Life"}
 ];
-const CATS = {all:["সব","All"], street:["স্ট্রিট","Street"], portrait:["পোর্ট্রেট","Portrait"], documentary:["ডকুমেন্টারি","Documentary"]};
+const CATS = {street:["স্ট্রিট","Street"], portrait:["পোর্ট্রেট","Portrait"], documentary:["ডকুমেন্টারি","Documentary"], series:["সিরিজ","Series"]};
 const LINKS = [
   {url:"https://facebook.com/YOUR-PAGE", bn:"ফেসবুক", en:"Facebook"},
   {url:"mailto:you@example.com", bn:"ইমেইল", en:"Email"}
@@ -133,7 +150,7 @@ const LINKS = [
 /* ========================== */
 
 const $ = id => document.getElementById(id);
-let lang = "en", cat = "all";
+let lang = "en", cat = "street";
 const L = o => o[lang];
 
 function render(){
@@ -147,7 +164,10 @@ function render(){
     $("tabs").append(b);
   });
   $("grid").innerHTML = "";
-  PHOTOS.filter(p=>cat==="all"||p.cat===cat).forEach(p=>{
+  let list = cat==="series" ? PHOTOS.filter(p=>p.series) : PHOTOS.filter(p=>p.cat===cat), last;
+  if(cat==="series") list = [...new Set(list.map(p=>p.series))].flatMap(n=>list.filter(p=>p.series===n));
+  list.forEach(p=>{
+    if(cat==="series" && p.series!==last){ const h=document.createElement("h3"); h.textContent=p.series; h.className="rv"; $("grid").append(h); last=p.series }
     const f = document.createElement("figure");
     f.tabIndex = 0; f.className="rv"; f.style.transitionDelay=(f.parentNode?0:(($("grid").children.length%3)*0.12))+"s";
     const img = new Image();
@@ -188,7 +208,34 @@ function onScroll(){
   });
 }
 if(!matchMedia("(prefers-reduced-motion:reduce)").matches){ addEventListener("scroll",onScroll,{passive:true}); onScroll(); }
-render(); reveal();
+function buildHighlights(){
+  const list = PHOTOS.filter(p=>p.highlight), sec = $("highlights");
+  if(!list.length) return;
+  let left = list.length; const ok = [];
+  const done = ()=>{
+    if(--left) return;
+    const items = list.map((p,i)=>ok[i]?{src:ok[i],alt:p.en}:null).filter(Boolean);
+    if(!items.length) return;
+    const belt = $("belt");
+    [...items,...items].forEach(x=>{
+      const f = document.createElement("figure"), im = new Image();
+      im.src = x.src; im.alt = x.alt; f.append(im);
+      f.onclick = ()=>{ $("lb").firstChild.src = x.src; $("lb").classList.add("on") };
+      belt.append(f);
+    });
+    belt.style.animationDuration = (items.length*8)+"s";
+    belt.addEventListener("touchstart",()=>belt.style.animationPlayState="paused",{passive:true});
+    belt.addEventListener("touchend",()=>belt.style.animationPlayState="",{passive:true});
+    sec.hidden = false;
+  };
+  list.forEach((p,i)=>{
+    const im = new Image();
+    im.onload = ()=>{ ok[i] = im.src; done() };
+    im.onerror = ()=>{ if(!im.dataset.t){ im.dataset.t = 1; im.src = p.src.replace("images/","") } else done() };
+    im.src = p.src;
+  });
+}
+render(); reveal(); buildHighlights();
 </script>
 </body>
 </html>
