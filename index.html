@@ -137,10 +137,10 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 // Add highlight:true to show a photo in the sliding Highlights strip under the banner.
 // Add series:"Name" to any photo to show it under the Series tab (same name = same series).
 const PHOTOS = [
-  {src:"images/street-01.jpg",   cat:"street",      en:"Dhaka street", highlight:true,    series:"Dhaka Streets"},
-  {src:"images/street-02.jpg",   cat:"street",      en:"Behind the glass", series:"Dhaka Streets"},
+  {src:"images/street-01.jpg",   cat:"street",      en:"Street", highlight:true},
+  {src:"images/street-02.jpg",   cat:"street",      en:"Behind the glass"},
   {src:"images/portrait-01.jpg", cat:"portrait",    en:"Portrait", highlight:true},
-  {src:"images/doc-01.jpg",      cat:"documentary", en:"Everyday life", highlight:true,   series:"Village Life"}
+  {src:"images/doc-01.jpg",      cat:"documentary", en:"Everyday life", highlight:true}
 ];
 const CATS = {street:["স্ট্রিট","Street"], portrait:["পোর্ট্রেট","Portrait"], documentary:["ডকুমেন্টারি","Documentary"], series:["সিরিজ","Series"]};
 const LINKS = [
@@ -166,6 +166,7 @@ function render(){
   $("grid").innerHTML = "";
   let list = cat==="series" ? PHOTOS.filter(p=>p.series) : PHOTOS.filter(p=>p.cat===cat), last;
   if(cat==="series") list = [...new Set(list.map(p=>p.series))].flatMap(n=>list.filter(p=>p.series===n));
+  if(!list.length){ const e=document.createElement("p"); e.textContent = cat==="series" ? "Series coming soon." : "Photos coming soon."; e.style.color="var(--glass)"; $("grid").append(e) }
   list.forEach(p=>{
     if(cat==="series" && p.series!==last){ const h=document.createElement("h3"); h.textContent=p.series; h.className="rv"; $("grid").append(h); last=p.series }
     const f = document.createElement("figure");
