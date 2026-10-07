@@ -10,6 +10,8 @@
 <style>
 /* BANNER PHOTO FOCUS: 0% shows the left side, 100% shows the right side */
 :root{--hero-x:95%}
+/* BANNER HEIGHT: smaller = shows more of the photo (e.g. 70svh). 100svh = full screen */
+:root{--hero-h:100svh}
 :root{--ink:#0f181c;--asphalt:#1b2a30;--glass:#cfe3e6;--lamp:#e8b04a;--paper:#eef3f2}
 *{box-sizing:border-box;margin:0}
 html{scroll-behavior:smooth}
@@ -23,7 +25,7 @@ a{color:inherit}
 .bar a:hover{color:var(--lamp)}
 #lang{background:none;border:1px solid var(--glass);color:var(--paper);padding:.2rem .8rem;border-radius:99px;font:inherit;cursor:pointer}
 #lang:hover{border-color:var(--lamp);color:var(--lamp)}
-.hero{position:relative;min-height:100svh;display:grid;place-content:end start;padding:6rem 1.4rem 3.5rem;background:linear-gradient(180deg,var(--ink) 0%,var(--asphalt) 55%,#2c4249 100%);overflow:hidden}.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,24,28,.5),rgba(15,24,28,.78)),var(--hero,none) var(--hero-x) center/cover no-repeat;translate:0 var(--py,0px);will-change:translate;animation:kb 24s ease-in-out infinite alternate}.hero>div{position:relative}@keyframes kb{to{transform:scale(1.05)}}
+.hero{position:relative;min-height:var(--hero-h);display:grid;place-content:end start;padding:6rem 1.4rem 3.5rem;background:linear-gradient(180deg,var(--ink) 0%,var(--asphalt) 55%,#2c4249 100%);overflow:hidden}.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,24,28,.5),rgba(15,24,28,.78)),var(--hero,none) var(--hero-x) center/cover no-repeat;translate:0 var(--py,0px);will-change:translate;animation:kb 24s ease-in-out infinite alternate}.hero>div{position:relative}@keyframes kb{to{transform:scale(1.05)}}
 .name{text-shadow:0 2px 20px rgba(0,0,0,.5);font-size:clamp(1.9rem,6.5vw,3.8rem);font-weight:300;line-height:1.15}.name [data-l=en]{text-transform:uppercase;letter-spacing:.26em;font-size:.82em}
 .name.mirror{transform:scaleY(-1);margin-top:.15em;opacity:.35;filter:blur(1.5px);-webkit-mask-image:linear-gradient(to bottom,transparent 15%,#000);mask-image:linear-gradient(to bottom,transparent 15%,#000);animation:ripple 7s ease-in-out infinite;user-select:none}
 @keyframes ripple{50%{transform:scaleY(-1) translateX(6px);filter:blur(3px)}}
