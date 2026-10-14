@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,500;1,300&display=swap" rel="stylesheet">
 <style>
 /* BANNER PHOTO FOCUS: 0% shows the left side, 100% shows the right side */
-:root{--hero-x:90%}
+:root{--hero-x:50%}
 /* BANNER HEIGHT: smaller = shows more of the photo (e.g. 70svh). 100svh = full screen */
 :root{--hero-h:100svh}
 :root{--ink:#0f181c;--asphalt:#1b2a30;--glass:#cfe3e6;--lamp:#e8b04a;--paper:#eef3f2}
@@ -81,6 +81,7 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 .belt img{display:block;height:clamp(14rem,34vw,23rem);width:auto}
 @keyframes slide{to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.belt{animation:none}.track{overflow-x:auto;-webkit-mask-image:none;mask-image:none}}
+.grid figcaption:empty{display:none}
 </style>
 </head>
 <body>
@@ -141,11 +142,66 @@ html[lang=bn] [data-l=bn],html[lang=en] [data-l=en]{display:revert}
 // Add highlight:true to show a photo in the sliding Highlights strip under the banner.
 // Add series:"Name" to any photo to show it under the Series tab (same name = same series).
 const PHOTOS = [
-  {src:"images/street-01.jpg",   cat:"street",      en:"Street", highlight:true},
-  {src:"images/street-02.jpg",   cat:"street",      en:"Street"}, highlight:true},
-   {src:"images/street-03.jpg",   cat:"street",      en:"Street"}, highlight:true},
-  {src:"images/portrait-01.jpg", cat:"portrait",    en:"Portrait", highlight:true},
-  {src:"images/doc-01.jpg",      cat:"documentary", en:"Everyday life", highlight:true}
+  {src:"images/street-01.jpg", cat:"street", en:"", highlight:true},
+  {src:"images/street-02.jpg", cat:"street", en:"", highlight:true},
+  {src:"images/street-03.jpg", cat:"street", en:"", highlight:true},
+  {src:"images/street-04.jpg", cat:"street", en:"", highlight:true},
+  {src:"images/street-05.jpg", cat:"street", en:"", highlight:true},
+  {src:"images/street-06.jpg", cat:"street", en:""},
+  {src:"images/street-07.jpg", cat:"street", en:""},
+  {src:"images/street-08.jpg", cat:"street", en:""},
+  {src:"images/street-09.jpg", cat:"street", en:""},
+  {src:"images/street-10.jpg", cat:"street", en:""},
+  {src:"images/street-11.jpg", cat:"street", en:""},
+  {src:"images/street-12.jpg", cat:"street", en:""},
+  {src:"images/street-13.jpg", cat:"street", en:""},
+  {src:"images/street-14.jpg", cat:"street", en:""},
+  {src:"images/street-15.jpg", cat:"street", en:""},
+  {src:"images/street-16.jpg", cat:"street", en:""},
+  {src:"images/street-17.jpg", cat:"street", en:""},
+  {src:"images/street-18.jpg", cat:"street", en:""},
+  {src:"images/street-19.jpg", cat:"street", en:""},
+  {src:"images/street-20.jpg", cat:"street", en:""},
+  {src:"images/portrait-01.jpg", cat:"portrait", en:"", highlight:true},
+  {src:"images/portrait-02.jpg", cat:"portrait", en:"", highlight:true},
+  {src:"images/portrait-03.jpg", cat:"portrait", en:"", highlight:true},
+  {src:"images/portrait-04.jpg", cat:"portrait", en:"", highlight:true},
+  {src:"images/portrait-05.jpg", cat:"portrait", en:"", highlight:true},
+  {src:"images/portrait-06.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-07.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-08.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-09.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-10.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-11.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-12.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-13.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-14.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-15.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-16.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-17.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-18.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-19.jpg", cat:"portrait", en:""},
+  {src:"images/portrait-20.jpg", cat:"portrait", en:""},
+  {src:"images/documentary-01.jpg", cat:"documentary", en:"", highlight:true},
+  {src:"images/documentary-02.jpg", cat:"documentary", en:"", highlight:true},
+  {src:"images/documentary-03.jpg", cat:"documentary", en:"", highlight:true},
+  {src:"images/documentary-04.jpg", cat:"documentary", en:"", highlight:true},
+  {src:"images/documentary-05.jpg", cat:"documentary", en:"", highlight:true},
+  {src:"images/documentary-06.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-07.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-08.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-09.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-10.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-11.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-12.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-13.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-14.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-15.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-16.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-17.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-18.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-19.jpg", cat:"documentary", en:""},
+  {src:"images/documentary-20.jpg", cat:"documentary", en:""},
 ];
 const CATS = {street:["স্ট্রিট","Street"], portrait:["পোর্ট্রেট","Portrait"], documentary:["ডকুমেন্টারি","Documentary"], series:["সিরিজ","Series"]};
 const LINKS = [
@@ -178,7 +234,7 @@ function render(){
     f.tabIndex = 0; f.className="rv"; f.style.transitionDelay=(f.parentNode?0:(($("grid").children.length%3)*0.12))+"s";
     const img = new Image();
     img.src = p.src; img.loading = "lazy"; img.alt = L(p);
-    img.onerror = ()=>{ if(!img.dataset.t){img.dataset.t=1;img.src=p.src.replace("images/","")} else {img.remove();f.style.minHeight="14rem"} };
+    img.onerror = ()=>{ if(!img.dataset.t){img.dataset.t=1;img.src=p.src.replace("images/","")} else { f.remove(); if(!$("grid").querySelector("figure") && !$("grid").querySelector(".soon")){ const e=document.createElement("p"); e.className="soon"; e.textContent="Photos coming soon."; e.style.color="var(--glass)"; $("grid").append(e) } } };
     const c = document.createElement("figcaption");
     c.textContent = L(p);
     f.append(img,c);
